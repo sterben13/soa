@@ -2,6 +2,7 @@
 import * as mongoose from 'mongoose';
 export class Crud {
     public model: mongoose.Model<mongoose.Document>;
+
     constructor(model: string, schema: mongoose.Schema) {
         mongoose.Promise = global.Promise;
         this.connection('mongodb://localhost/test');
@@ -63,7 +64,7 @@ export class Crud {
         });
     }
 
-    delete(id) {
+    delete(id:string) {
         return new Promise((resolve, reject) => {   
             this.model.remove({_id:id},(err:Error)=>{
                 if(err){
@@ -75,9 +76,14 @@ export class Crud {
         })
     }
 
-    update(id) {
+    update(id, doc) {
         return new Promise((resolve, reject) => {
-
+            this.model.update({_id:id},doc)
+            .then((doc)=>{
+                resolve(doc);
+            }).catch((err:Error)=>{
+                reject(err.message)
+            });
         });
     }
 }

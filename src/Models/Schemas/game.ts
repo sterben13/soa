@@ -1,5 +1,9 @@
 /// <reference path="../../../typings/index.d.ts" />
 import * as mongoose from 'mongoose';
+
+/**
+ * Mediante un objeto Json declaramos las propiedades de los documentos en mongo
+ */
 let gameJson:Object = {
     title:{type:String, require:true},
     imagen:String,

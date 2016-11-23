@@ -37,6 +37,14 @@ exports.gameApp.get('/games/:id', (req, res) => {
     game.close();
 });
 exports.gameApp.put('/games/:id', (req, res) => {
+    res.setHeader('Content-Type', 'application/json');
+    let game = new gameCrud_1.Game();
+    game.update(req.params.id, req.body).then((doc) => {
+        res.send(JSON.stringify(doc));
+    }).catch((err) => {
+        res.send(JSON.stringify({ "message": err }));
+    });
+    game.close();
 });
 exports.gameApp.delete('/games/:id', (req, res) => {
     let game = new gameCrud_1.Game();
