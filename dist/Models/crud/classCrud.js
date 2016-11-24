@@ -1,9 +1,13 @@
 "use strict";
+var servidor = 'localhost';
+if (process.platform == 'win32') {
+    servidor = '127.0.0.1:27017';
+}
 const mongoose = require('mongoose');
 class Crud {
     constructor(model, schema) {
         mongoose.Promise = global.Promise;
-        this.connection('mongodb://localhost/test');
+        this.connection('mongodb://' + servidor + '/test');
         this.model = mongoose.model(model, schema);
     }
     connection(uri) {
