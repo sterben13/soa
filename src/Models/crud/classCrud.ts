@@ -1,5 +1,5 @@
 /// <reference path="../../../typings/index.d.ts" />
- var servidor:string = 'localhost';
+var servidor:string = 'localhost';
 if (process.platform == 'win32') {
     servidor = '127.0.0.1:27017';
 }
@@ -11,11 +11,7 @@ export class Crud {
 //Cambiar la direccion en process
     constructor(model: string, schema: mongoose.Schema) {
         mongoose.Promise = global.Promise;
-<<<<<<< Updated upstream
         this.connection('mongodb://'+servidor+'/test');
-=======
-        this.connection('mongodb://localhost:27017/test');
->>>>>>> Stashed changes
         this.model = mongoose.model(model, schema);
     }
 
