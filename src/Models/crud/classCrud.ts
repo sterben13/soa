@@ -11,11 +11,15 @@ export class Crud {
 //Cambiar la direccion en process
     constructor(model: string, schema: mongoose.Schema) {
         mongoose.Promise = global.Promise;
+<<<<<<< Updated upstream
         this.connection('mongodb://'+servidor+'/test');
+=======
+        this.connection('mongodb://localhost:27017/test');
+>>>>>>> Stashed changes
         this.model = mongoose.model(model, schema);
     }
 
-    connection(uri:string) {
+    connection(uri: string) {
         mongoose.connect(uri)
             .then(() => {
                 console.log('Conexion exitosa');
@@ -35,10 +39,10 @@ export class Crud {
             });
     }
 
-    insert(doc:Object) {
+    insert(doc: Object) {
         return new Promise((resolve, reject) => {
             new this.model(doc).save()
-                .then((doc:mongoose.Document) => {
+                .then((doc: mongoose.Document) => {
                     resolve(doc);
                 })
                 .catch((err: Error) => {
@@ -50,46 +54,46 @@ export class Crud {
     findById(id: String) {
         return new Promise((resolve, reject) => {
             this.model.findById(id)
-            .then((doc:mongoose.Document) => {
-                resolve(doc);
-            }).catch((err:Error) => {
-                reject(err.message);
-            });
+                .then((doc: mongoose.Document) => {
+                    resolve(doc);
+                }).catch((err: Error) => {
+                    reject(err.message);
+                });
         })
     }
 
     findAll() {
-        return new Promise((resolve, reject)=>{
+        return new Promise((resolve, reject) => {
             this.model.find()
-            .then((doc)=>{
-                resolve(doc);
-            })
-            .catch((err:Error)=>{
-                reject(err.message)
-            })
+                .then((doc) => {
+                    resolve(doc);
+                })
+                .catch((err: Error) => {
+                    reject(err.message)
+                })
         });
     }
 
-    delete(id:string) {
-        return new Promise((resolve, reject) => {   
-            this.model.remove({_id:id},(err:Error)=>{
-                if(err){
-                    reject(err.message);
-                }else{
+    delete(id: string) {
+        return new Promise((resolve, reject) => {
+            this.model.remove({ _id: id })
+                .then(() => {
                     resolve();
-                }
-            });
-        })
+                })
+                .catch((err: Error) => {
+                    reject(err.message);
+                });
+        });
     }
 
     update(id, doc) {
         return new Promise((resolve, reject) => {
-            this.model.update({_id:id},doc)
-            .then((doc)=>{
-                resolve(doc);
-            }).catch((err:Error)=>{
-                reject(err.message)
-            });
+            this.model.update({ _id: id }, doc)
+                .then((doc) => {
+                    resolve(doc);
+                }).catch((err: Error) => {
+                    reject(err.message)
+                });
         });
     }
 }

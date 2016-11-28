@@ -5,6 +5,7 @@ export class Game extends Crud{
     constructor() {
         super('Game', gameSchema);
     }
+<<<<<<< Updated upstream
 }
 
 export class User extends Crud {
@@ -26,3 +27,6 @@ export class Copia extends Crud {
         super('Copia', copiaSchema);
     }
 }
+=======
+}
+>>>>>>> Stashed changes

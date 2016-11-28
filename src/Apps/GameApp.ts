@@ -54,11 +54,12 @@ gameApp.put('/games/:id',(req, res)=>{
 });
 
 gameApp.delete('/games/:id',(req, res)=>{
+    res.setHeader('Content-Type', 'application/json');
     let game = new Game();
     game.delete(req.params.id).then(()=>{
-        res.send('eliminado');
+        res.send({'message':'eliminado'});
     }).catch((err)=>{
-        res.send(err);
+        res.send({"message":err});
     })
     game.close();
 });
