@@ -19,7 +19,8 @@ let userJson = {
     telefono: String,
     direccion: String,
     foto: String,
-    email: String
+    email: String,
+    password: String
 };
 exports.userSchema = new mongoose.Schema(userJson);
 let prestamoJson = {

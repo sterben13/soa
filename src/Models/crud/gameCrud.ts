@@ -26,4 +26,3 @@ export class Copia extends Crud {
         super('Copia', copiaSchema);
     }
 }
-

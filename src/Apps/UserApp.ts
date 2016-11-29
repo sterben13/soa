@@ -2,6 +2,14 @@
 import { User } from './../Models/crud/gameCrud';
 import * as express from 'express';
 import * as bodyParse from 'body-parser';
+import * as multer from 'multer';
+const uploadProfilePhoto = multer({
+    dest: './public/images/profile-photos/',
+    limits: {
+        fileSize: 1000000,
+        files: 1
+    }
+});
 
 export let userApp:express.Application = express();
 
@@ -19,7 +27,11 @@ userApp.get('/users',(req, res)=>{
     user.close();
 });
 
-userApp.post('/users',(req, res)=>{
+userApp.post('/users', uploadProfilePhoto.single('foto'), (req, res)=>{
+    console.log("creando un nuevo user");
+    console.log(req.body);
+    if (req.file) 
+    req.body.foto = '/' + req.file.path;
     res.setHeader('Content-Type', 'application/json');
     let user = new User();
     user.insert(req.body)

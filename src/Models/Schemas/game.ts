@@ -25,7 +25,8 @@ let userJson:Object = {
     telefono:String,
     direccion:String,
     foto:String,
-    email:String
+    email:String,
+    password:String
 };
 
 export let userSchema:mongoose.Schema = new mongoose.Schema(userJson);
@@ -35,7 +36,6 @@ let prestamoJson:Object = {
     idUser:String,
     fecha_autorizacion:{type: Date, default: Date.now},
     fecha_retorno:{type: Date, default: Date.now}
-
 };
 
 export let prestamoSchema:mongoose.Schema = new mongoose.Schema(prestamoJson);
