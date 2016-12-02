@@ -11,6 +11,7 @@ const uploadProfilePhoto = multer({
     }
 });
 
+
 export let userApp:express.Application = express();
 
 userApp.use(bodyParse.json());
@@ -36,6 +37,7 @@ userApp.post('/users', uploadProfilePhoto.single('foto'), (req, res)=>{
     let user = new User();
     user.insert(req.body)
     .then((doc)=>{
+        console.log(doc);
         res.send(JSON.stringify(doc));
     }).catch((err)=>{
         res.send(JSON.stringify({"message":err}));

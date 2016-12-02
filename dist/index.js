@@ -5,8 +5,9 @@ const PrestamoApp_1 = require('./Apps/PrestamoApp');
 const CopiaApp_1 = require('./Apps/CopiaApp');
 const http = require('http');
 const express = require('express');
-let port = process.env.PORT || 3000;
+let port = process.env.PORT || 3001;
 let app = express();
+app.use('/public', express.static('/var/www/html/proyecto/public'));
 app.use(function (req, res, next) {
     res.setHeader('Access-Control-Allow-Origin', 'http://localhost:4200');
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');

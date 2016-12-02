@@ -32,6 +32,7 @@ exports.userApp.post('/users', uploadProfilePhoto.single('foto'), (req, res) => 
     let user = new gameCrud_1.User();
     user.insert(req.body)
         .then((doc) => {
+        console.log(doc);
         res.send(JSON.stringify(doc));
     }).catch((err) => {
         res.send(JSON.stringify({ "message": err }));
