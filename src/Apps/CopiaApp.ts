@@ -1,12 +1,8 @@
 /// <reference path="../../typings/index.d.ts" />
 import { Copia } from './../Models/crud/gameCrud';
 import * as express from 'express';
-import * as bodyParse from 'body-parser';
 
 export let copiaApp:express.Application = express();
-
-copiaApp.use(bodyParse.json());
-copiaApp.use(bodyParse.urlencoded({ extended: true }));
 
 copiaApp.get('/copias',(req, res)=>{
     res.setHeader('Content-Type', 'application/json');

@@ -1,8 +1,8 @@
 /// <reference path="../../typings/index.d.ts" />
 import { User } from './../Models/crud/gameCrud';
 import * as express from 'express';
-import * as bodyParse from 'body-parser';
 import * as multer from 'multer';
+
 const uploadProfilePhoto = multer({
     dest: './public/images/profile-photos/',
     limits: {
@@ -11,11 +11,7 @@ const uploadProfilePhoto = multer({
     }
 });
 
-
 export let userApp:express.Application = express();
-
-userApp.use(bodyParse.json());
-userApp.use(bodyParse.urlencoded({ extended: true }));
 
 userApp.get('/users',(req, res)=>{
     res.setHeader('Content-Type', 'application/json');
@@ -56,7 +52,9 @@ userApp.get('/users/:id',(req, res)=>{
     user.close();
 });
 
-userApp.put('/users/:id',(req, res)=>{
+userApp.put('/users/:id', uploadProfilePhoto.single('foto'), (req, res)=>{
+    if (req.file) 
+    req.body.foto = '/' + req.file.path;
     res.setHeader('Content-Type', 'application/json');
     let user = new User();
     user.update(req.params.id, req.body).then((doc)=>{

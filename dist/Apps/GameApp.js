@@ -1,10 +1,7 @@
 "use strict";
 const gameCrud_1 = require('./../Models/crud/gameCrud');
 const express = require('express');
-const bodyParse = require('body-parser');
 exports.gameApp = express();
-exports.gameApp.use(bodyParse.json());
-exports.gameApp.use(bodyParse.urlencoded({ extended: true }));
 exports.gameApp.get('/games', (req, res) => {
     res.setHeader('Content-Type', 'application/json');
     let game = new gameCrud_1.Game();

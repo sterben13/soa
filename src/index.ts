@@ -4,12 +4,14 @@ import { prestamoApp } from './Apps/PrestamoApp';
 import { copiaApp } from './Apps/CopiaApp';
 import * as http from 'http';
 import * as express from 'express';
+import * as bodyParse from 'body-parser';
 
 let port:number = process.env.PORT||3001;
 let app:express.Application = express();
 
 app.use('/public',express.static('/var/www/html/proyecto/public'));
-
+app.use(bodyParse.json());
+app.use(bodyParse.urlencoded({ extended: true }));
 app.use(function (req, res, next) {
     res.setHeader('Access-Control-Allow-Origin', 'http://localhost:4200');
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');

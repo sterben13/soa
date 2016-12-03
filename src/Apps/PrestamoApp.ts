@@ -1,12 +1,8 @@
 /// <reference path="../../typings/index.d.ts" />
 import { Prestamo } from './../Models/crud/gameCrud';
 import * as express from 'express';
-import * as bodyParse from 'body-parser';
 
 export let prestamoApp:express.Application = express();
-
-prestamoApp.use(bodyParse.json());
-prestamoApp.use(bodyParse.urlencoded({ extended: true }));
 
 prestamoApp.get('/prestamos',(req, res)=>{
     res.setHeader('Content-Type', 'application/json');

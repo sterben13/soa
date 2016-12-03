@@ -5,9 +5,6 @@ import * as bodyParse from 'body-parser';
 
 export let gameApp:express.Application = express();
 
-gameApp.use(bodyParse.json());
-gameApp.use(bodyParse.urlencoded({ extended: true }));
-
 gameApp.get('/games',(req, res)=>{
     res.setHeader('Content-Type', 'application/json');
     let game = new Game();

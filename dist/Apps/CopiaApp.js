@@ -1,10 +1,7 @@
 "use strict";
 const gameCrud_1 = require('./../Models/crud/gameCrud');
 const express = require('express');
-const bodyParse = require('body-parser');
 exports.copiaApp = express();
-exports.copiaApp.use(bodyParse.json());
-exports.copiaApp.use(bodyParse.urlencoded({ extended: true }));
 exports.copiaApp.get('/copias', (req, res) => {
     res.setHeader('Content-Type', 'application/json');
     let copia = new gameCrud_1.Copia();
