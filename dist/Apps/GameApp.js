@@ -1,6 +1,14 @@
 "use strict";
 const gameCrud_1 = require('./../Models/crud/gameCrud');
 const express = require('express');
+const multer = require('multer');
+const uploadGameCover = multer({
+    dest: './public/images/game-cover/',
+    limits: {
+        fileSize: 1000000,
+        files: 1
+    }
+});
 exports.gameApp = express();
 exports.gameApp.get('/games', (req, res) => {
     res.setHeader('Content-Type', 'application/json');
@@ -12,9 +20,12 @@ exports.gameApp.get('/games', (req, res) => {
     });
     game.close();
 });
-exports.gameApp.post('/games', (req, res) => {
+exports.gameApp.post('/games', uploadGameCover.single('imagen'), (req, res) => {
     res.setHeader('Content-Type', 'application/json');
     let game = new gameCrud_1.Game();
+    console.log(req.body);
+    if (req.file)
+        req.body.imagen = '/' + req.file.path;
     game.insert(req.body)
         .then((doc) => {
         res.send(JSON.stringify(doc));
@@ -33,7 +44,9 @@ exports.gameApp.get('/games/:id', (req, res) => {
     });
     game.close();
 });
-exports.gameApp.put('/games/:id', (req, res) => {
+exports.gameApp.put('/games/:id', uploadGameCover.single('imagen'), (req, res) => {
+    if (req.file)
+        req.body.imagen = '/' + req.file.path;
     res.setHeader('Content-Type', 'application/json');
     let game = new gameCrud_1.Game();
     game.update(req.params.id, req.body).then((doc) => {

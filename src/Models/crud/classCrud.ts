@@ -92,4 +92,8 @@ export class Crud {
                 });
         });
     }
+
+    search(name){
+        
+    }
 }

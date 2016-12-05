@@ -12,8 +12,10 @@ app.use('/public', express.static('/var/www/html/proyecto/public'));
 app.use(bodyParse.json());
 app.use(bodyParse.urlencoded({ extended: true }));
 app.use(function (req, res, next) {
-    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:4200');
+    res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+    res.setHeader('Access-Control-Allow-Credentials', true);
     next();
 });
 app.use('/api/v1', GameApp_1.gameApp);

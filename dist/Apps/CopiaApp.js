@@ -1,4 +1,5 @@
 "use strict";
+const CopiaApp_1 = require('./CopiaApp');
 const gameCrud_1 = require('./../Models/crud/gameCrud');
 const express = require('express');
 exports.copiaApp = express();
@@ -15,6 +16,7 @@ exports.copiaApp.get('/copias', (req, res) => {
 exports.copiaApp.post('/copias', (req, res) => {
     res.setHeader('Content-Type', 'application/json');
     let copia = new gameCrud_1.Copia();
+    console.log(req.body);
     copia.insert(req.body)
         .then((doc) => {
         res.send(JSON.stringify(doc));
@@ -50,5 +52,11 @@ exports.copiaApp.delete('/copias/:id', (req, res) => {
     }).catch((err) => {
         res.send(err);
     });
+    copia.close();
+});
+exports.copiaApp.get('/search', (req, res) => {
+    let name = req.query.name;
+    let copia = new gameCrud_1.Copia();
+    copia.search(name.toString());
     copia.close();
 });

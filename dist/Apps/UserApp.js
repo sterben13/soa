@@ -21,7 +21,6 @@ exports.userApp.get('/users', (req, res) => {
     user.close();
 });
 exports.userApp.post('/users', uploadProfilePhoto.single('foto'), (req, res) => {
-    console.log("creando un nuevo user");
     console.log(req.body);
     if (req.file)
         req.body.foto = '/' + req.file.path;

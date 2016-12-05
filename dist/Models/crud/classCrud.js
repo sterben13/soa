@@ -81,5 +81,7 @@ class Crud {
             });
         });
     }
+    search(name) {
+    }
 }
 exports.Crud = Crud;

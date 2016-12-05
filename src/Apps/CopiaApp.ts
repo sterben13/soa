@@ -1,3 +1,4 @@
+import { copiaApp } from './CopiaApp';
 /// <reference path="../../typings/index.d.ts" />
 import { Copia } from './../Models/crud/gameCrud';
 import * as express from 'express';
@@ -18,6 +19,7 @@ copiaApp.get('/copias',(req, res)=>{
 copiaApp.post('/copias',(req, res)=>{
     res.setHeader('Content-Type', 'application/json');
     let copia = new Copia();
+    console.log(req.body);
     copia.insert(req.body)
     .then((doc)=>{
         res.send(JSON.stringify(doc));
@@ -58,3 +60,10 @@ copiaApp.delete('/copias/:id',(req, res)=>{
     })
     copia.close();
 });
+
+copiaApp.get('/search',(req, res)=>{
+    let name = req.query.name;
+    let copia = new Copia();
+    copia.search(name.toString());
+    copia.close();
+})
