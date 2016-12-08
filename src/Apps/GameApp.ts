@@ -72,3 +72,16 @@ gameApp.delete('/games/:id', (req, res) => {
     })
     game.close();
 });
+
+gameApp.get('/games/search/:name',(req, res)=>{
+    let name = req.params.name;
+    let game = new Game();
+    game.search(name)
+    .then((doc)=>{
+        console.log(doc);
+        res.send(doc);
+    }).catch((err)=>{
+        res.send(err);
+    });
+    game.close();
+});

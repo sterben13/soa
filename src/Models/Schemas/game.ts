@@ -43,6 +43,7 @@ let prestamoJson:Object = {
 export let prestamoSchema:mongoose.Schema = new mongoose.Schema(prestamoJson);
 
 let copiaJson:Object = {
+    title:String,
     idGame:String,
     estado: { type: String, enum: ["ok", "dañado", "perdido", "irreparable"] },
     disponibilidad:Boolean

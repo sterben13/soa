@@ -94,6 +94,17 @@ export class Crud {
     }
 
     search(name){
-        
+        return new Promise((resolve, reject)=>{
+            this.model
+            .find({
+                "title": new RegExp(".*" + name.replace(/(\W)/g, "\\$1") + ".*", "i")
+            })
+            .then((doc)=>{
+                reject(doc);
+            })
+            .catch((err)=>{
+                resolve(err);
+            });
+        });
     }
 }
