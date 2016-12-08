@@ -1,3 +1,4 @@
+import { prestamoApp } from './PrestamoApp';
 /// <reference path="../../typings/index.d.ts" />
 import { Prestamo } from './../Models/crud/gameCrud';
 import * as express from 'express';
@@ -56,5 +57,19 @@ prestamoApp.delete('/prestamos/:id',(req, res)=>{
     }).catch((err)=>{
         res.send(err);
     })
+    prestamo.close();
+});
+
+prestamoApp.get('/prestamos/user/:id',(req, res)=>{
+    let prestamo = new Prestamo();
+    prestamo.prestamosByUser(req.params.id)
+    .then((doc)=>{
+        res.setHeader('Content-Type', 'application/json');
+        res.send(JSON.stringify(doc));
+    })
+    .catch((err)=>{
+        res.send(err);
+     });
+
     prestamo.close();
 });

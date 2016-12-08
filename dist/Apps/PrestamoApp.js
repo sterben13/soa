@@ -1,4 +1,5 @@
 "use strict";
+const PrestamoApp_1 = require('./PrestamoApp');
 const gameCrud_1 = require('./../Models/crud/gameCrud');
 const express = require('express');
 exports.prestamoApp = express();
@@ -48,6 +49,18 @@ exports.prestamoApp.delete('/prestamos/:id', (req, res) => {
     prestamo.delete(req.params.id).then(() => {
         res.send('eliminado');
     }).catch((err) => {
+        res.send(err);
+    });
+    prestamo.close();
+});
+exports.prestamoApp.get('/prestamos/user/:id', (req, res) => {
+    let prestamo = new gameCrud_1.Prestamo();
+    prestamo.prestamosByUser(req.params.id)
+        .then((doc) => {
+        res.setHeader('Content-Type', 'application/json');
+        res.send(JSON.stringify(doc));
+    })
+        .catch((err) => {
         res.send(err);
     });
     prestamo.close();

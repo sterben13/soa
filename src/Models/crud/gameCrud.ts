@@ -18,6 +18,18 @@ export class Prestamo extends Crud {
     constructor() {
         super('Prestamo', prestamoSchema);
     }
+
+    prestamosByUser(id:string){
+        return new Promise((resolve, reject)=>{
+            this.model.find({idUser:id})
+            .then((doc)=>{
+                resolve(doc);
+            })
+            .catch((err)=>{
+                reject(err);
+            });
+        });
+    }
 }
 
 

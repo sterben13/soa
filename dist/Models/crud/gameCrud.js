@@ -17,6 +17,17 @@ class Prestamo extends classCrud_1.Crud {
     constructor() {
         super('Prestamo', game_1.prestamoSchema);
     }
+    prestamosByUser(id) {
+        return new Promise((resolve, reject) => {
+            this.model.find({ idUser: id })
+                .then((doc) => {
+                resolve(doc);
+            })
+                .catch((err) => {
+                reject(err);
+            });
+        });
+    }
 }
 exports.Prestamo = Prestamo;
 class Copia extends classCrud_1.Crud {
